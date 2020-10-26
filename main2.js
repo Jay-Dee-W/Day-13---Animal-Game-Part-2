@@ -8,18 +8,16 @@ function Node(data, y, n) {
     this.no = n;
   }
 
-let data = fs.readFileSync('binaryTree.json');
-
-let tree = JSON.parse(data)
-let node;
+let tree = fs.readFileSync('binaryTree.json');
+let root = JSON.parse(tree)
 
 go()
 
 function go() {
   console.log("Computer: Think of an animal")
- 
-     node = tree
- if (node.yes && node.no) {
+
+  let node = root
+ while (node.yes && node.no) {
     console.log("Computer: " + node.data)
     let yesOrNo = readlineSync.question("Human : ");
     if (yesOrNo.toLowerCase() == "no") {
@@ -28,7 +26,7 @@ function go() {
       node = node.yes;
     }
   }
-  console.log("Computer: Is it a " + node.data + "?")
+  console.log("Computer: Is it " + node.data + "?")
   let yesOrNo1 = readlineSync.question("Human : ");
   if (yesOrNo1.toLowerCase() == "no") {
     improve(node);
@@ -65,6 +63,6 @@ console.log("Computer: What is the animal?")
 
   }
   console.log("Computer: Thanks for helping me to improve!");
-  data = JSON.stringify(tree, null,2)
-  fs.writeFileSync('binaryTree.json', data);
+  let dataOut = JSON.stringify(root, null,2)
+  fs.writeFileSync('binaryTree.json', dataOut);
 }
